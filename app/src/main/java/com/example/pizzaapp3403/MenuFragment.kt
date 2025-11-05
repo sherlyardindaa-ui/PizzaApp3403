@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +39,17 @@ class MenuFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val rvMenu = view.findViewById<RecyclerView>(R.id.recycleViewMenu)
+        rvMenu.layoutManager = GridLayoutManager(activity,2)
+        val menu = ArrayList<MenuModel>()
+        menu.add(MenuModel(R.drawable.logo_pizza, "Pizza 1", 20000))
+        menu.add(MenuModel(R.drawable.logo_pizza, "Pizza 2", 30000))
+    }
+
+    //set adapter
+    val adapter = AdapterMenu(menu)
     companion object {
         /**
          * Use this factory method to create a new instance of
