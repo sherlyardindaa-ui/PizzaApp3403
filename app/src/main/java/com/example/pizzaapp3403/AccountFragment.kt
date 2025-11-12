@@ -5,6 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+
+private val AccountFragment.btnSave: Int
+private var AccountFragment.notificationManager: Any
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,11 +23,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AccountFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+    private lateinit var notificationCompat: NotificationManagerCompat
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreated(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
@@ -35,6 +41,20 @@ class AccountFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false)
+    }
+    override fun onViewCreated(savedInstanceState: Bundle?) {
+        super.onViewCreated(savedInstanceState)
+        notificationManager = NotificationManagerCompat.form(view.context)
+
+        val btnSave = view.findViewById<Button>(R.id.btnSave)
+
+        btnSave.setOnClickListener {
+            val tittle = "Change Account"
+            val massage = "You have changed your account data"
+
+            val builder = NotificationCompat.Builder(view.context, BaseApplication.CHANNEL_1_ID)
+
+        }
     }
 
     companion object {
