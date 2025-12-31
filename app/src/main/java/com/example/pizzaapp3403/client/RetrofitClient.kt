@@ -1,13 +1,17 @@
 package com.example.pizzaapp3403.client
 
-object RetrofitClient {
-    const val BASE_URL = "http://192.168.100.87:80/rest_api3403/index.php/"
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-    val instance:Api by lazy {
-        val retrofit = Retrofit.Builder()
-            .baseurl(BASE_URL)
+object RetrofitClient {
+
+    const val BASE_URL = "http://10.24.2.65/rest_api3403/index.php/"
+
+    val instance: Api by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .build();
+            .build()
+            .create(Api::class.java)
     }
-    retrofit.create(Api::class.java)
 }
